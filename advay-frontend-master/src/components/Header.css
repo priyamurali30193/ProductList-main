@@ -1,0 +1,38 @@
+.site-header {
+  background-color: #f8f9fa;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.site-header .logo {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.site-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.site-header nav a:hover {
+  color: #bf9b30;
+}
+.logo-img {
+  height: 60px;
+}

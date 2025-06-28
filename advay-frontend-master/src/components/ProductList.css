@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.product-table-container {
+ background-image: url('/public/img/About-banner.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  padding: 2rem;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  backdrop-filter: brightness(0.95); /* optional darken for readability */
+   display: flex;
+  justify-content: center;  /* centers horizontally */
+  align-items: flex-start;  /* align to top */
+
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2c2c85;
+}
+
+.product-table {
+ background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 1650px;
+  overflow-x: auto;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px;
+  border: 1px solid #a5d6a7;
+  vertical-align: middle;
+}
+
+.product-table th {
+  background-color: #f1f8e9;
+  color: #2c2c85;
+}
+
+.category-row {
+  background-color: #81c784;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  border: 1px solid #81c784;
+}
+
+.product-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.original-price {
+  background-color: gold;
+  color: #000;
+  padding: 4px 8px;
+  margin-right: 6px;
+  border-radius: 999px;
+  font-weight: bold;
+  text-decoration: line-through;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.discount-price {
+  background-color: green;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+
+.qty-input {
+  width: 60px;
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.add-btn {
+  background-color: #2c2c85;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  background-color: #1b1b5f;
+}
+
+.no-products {
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: bold;
+}
