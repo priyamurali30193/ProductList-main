@@ -6,7 +6,7 @@ const CartPage = () => {
   const { cartItems, addToCart, removeFromCart } = useCart();
   const items = cartItems || [];
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  //const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce(
     (sum, item) => sum + (parseFloat(item.discountPrice) || 0) * item.quantity,
     0

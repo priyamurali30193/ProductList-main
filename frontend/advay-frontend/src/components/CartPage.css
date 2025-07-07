@@ -1,7 +1,7 @@
 .cart-page {
   padding: 2rem;
   background-color: #fff;
-  max-width: 1200px;
+  max-width: 100vw;
   margin: auto;
    background-image: url('/public/img/About-banner.jpg');
    background-size: cover;
