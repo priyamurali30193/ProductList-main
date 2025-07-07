@@ -94,7 +94,7 @@ const ProductList = () => {
                                 imageUrl: productImage,
                                 discountPrice: productPrice,
                                 quantity: 1
-                              })
+                              },true)
                             }
                           >
                             Add
