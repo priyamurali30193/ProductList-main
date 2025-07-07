@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema({
   name: String,
   description: String,
   originalPrice: Number,     // ✅ MRP
-  discountPrice: Number,     // ✅ Selling price
+  discountPrice: Number,
   imageUrl: String,
   inStock: Boolean,
   category: String,

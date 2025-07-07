@@ -7,6 +7,7 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+    const [showCartPopup, setShowCartPopup] = useState(false); 
 
   const addToCart = (product) => {
     setCartItems((prev) => {
@@ -21,6 +22,7 @@ export const CartProvider = ({ children }) => {
         return [...prev, { ...product, quantity: 1 }];
       }
     });
+    setShowCartPopup(true); 
   };
 
   const removeFromCart = (productId) => {
@@ -37,9 +39,9 @@ export const CartProvider = ({ children }) => {
       }
     });
   };
-
+const hideCartPopup = () => setShowCartPopup(false);
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart,showCartPopup,hideCartPopup }}>
       {children}
     </CartContext.Provider>
   );

@@ -8,27 +8,37 @@ const ProductList = () => {
   const { cartItems, addToCart } = useCart();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then((r) => r.json())
-      .then(setProducts);
+    fetch('https://advaytraders.in/api/products.php')
+      .then((res) => res.json())
+      .then((data) => {
+        const extractedProducts = Object.values(data.products)[0];
+        console.log('Fetched Products:', extractedProducts);
+        setProducts(extractedProducts);
+      })
+      .catch((err) => console.error('Failed to load products:', err));
   }, []);
 
-  const groupedProducts = products.reduce((acc, product) => {
-    const cat = product.category?.trim() || 'Uncategorized';
-    if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(product);
-    return acc;
-  }, {});
+  const groupedProducts = Array.isArray(products)
+    ? products.reduce((acc, product) => {
+        const category = product.Category?.trim() || 'Uncategorized';
+        if (!acc[category]) acc[category] = [];
+        acc[category].push(product);
+        return acc;
+      }, {})
+    : {};
 
   const categoryOrder = [
-    'Single Sound Crackers', 'Flower Pot', 'Ground Chakkar',
-    'Twinkling Star', 'Bombs', 'GIFT BOXES'
+    'SINGLE SOUND CRACKERS',
+    'FLOWERPOTS',
+    'GROUND CHAKKAR',
+    'TWINKLING STAR',
+    'BOMBS',
+    'GIFT BOXES'
   ];
 
   return (
     <div className="product-table-container">
       <h2 className="title">Order Online</h2>
-
       <table className="product-table">
         <thead>
           <tr>
@@ -37,8 +47,8 @@ const ProductList = () => {
             <th>Pack</th>
             <th>Category</th>
             <th>Price</th>
-            <th>Qty</th>
             <th>Cart</th>
+            <th>Qty</th>
           </tr>
         </thead>
         <tbody>
@@ -51,26 +61,47 @@ const ProductList = () => {
                 <tr>
                   <td colSpan="7" className="category-row">{category}</td>
                 </tr>
+
                 {items.map((p) => {
-                  const cartItem = cartItems.find(i => i._id === p._id);
+                  const cartItem = cartItems.find(i => i._id === p.id);
+                  const productName = p["Product Name"] || "Unnamed Product";
+                  const productImage = p.img || 'https://advaytraders.in/images/no-image.png';
+                  const productPrice = parseFloat(p["Discount Price"] || p["Original Price"] || 0);
+
                   return (
-                    <tr key={p._id}>
-                      <td><img src={p.imageUrl} alt={p.name} className="product-img" /></td>
-                      <td>{p.name}</td>
-                      <td>{p.pack || '1 Pkt'}</td>
-                      <td>{p.category}</td>
+                    <tr key={p.id}>
                       <td>
-                        <span className="original-price">₹{(p.originalPrice || 0).toFixed(2)}</span>{' '}
-                        <span className="discount-price">₹{(p.discountPrice || 0).toFixed(2)}</span>
+                        <img
+                          src={productImage}
+                          alt={productName}
+                          className="product-img"
+                        />
                       </td>
+                      <td>{productName}</td>
+                      <td>{p.Unit || '1 Pkt'}</td>
+                      <td>{p.Category}</td>
+                      <td>₹{productPrice.toFixed(2)}</td>
                       <td>
                         {cartItem ? (
                           <CartControls item={cartItem} />
                         ) : (
-                          <button className="add-btn" onClick={() => addToCart(p)}>Add</button>
+                          <button
+                            className="add-btn"
+                            onClick={() =>
+                              addToCart({
+                                _id: p.id,
+                                name: productName,
+                                imageUrl: productImage,
+                                discountPrice: productPrice,
+                                quantity: 1
+                              })
+                            }
+                          >
+                            Add
+                          </button>
                         )}
                       </td>
-                      <td>{cartItem?.qty || 0}</td>
+                      <td>{cartItem?.quantity || 0}</td>
                     </tr>
                   );
                 })}

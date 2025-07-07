@@ -7,8 +7,8 @@ const CartControls = ({ item }) => {
   return (
     <div className="cart-controls">
       <button onClick={() => removeFromCart(item._id)}>-</button>
-      <span>{item.qty}</span>
-      <button onClick={() => addToCart(item._id)}>+</button>
+      <span>{item.quantity}</span>
+      <button onClick={() => addToCart(item)}>+</button>
     </div>
   );
 };

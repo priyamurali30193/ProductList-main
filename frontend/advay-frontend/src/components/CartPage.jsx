@@ -3,14 +3,11 @@ import { useCart } from './CartContext';
 import './CartPage.css';
 
 const CartPage = () => {
-  const { cart, addToCart, removeFromCart } = useCart();
-  const items = Object.values(cart);
-debugger;
-  const totalItems = items.reduce((sum, item) => sum + item.qty, 0);
-  const totalPrice = items.reduce(
-    (sum, item) => sum + (item.discountPrice || 0) * item.qty,
-    0
-  );
+  const { cartItems, addToCart, removeFromCart } = useCart();   // ✅ Correct variable name
+  const items = cartItems || [];  // ✅ Always an array (even if empty)
+
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrice = items.reduce((sum, item) => sum + (item.discountPrice || 0) * item.quantity, 0);
 
   return (
     <div className="cart-page">
@@ -31,17 +28,17 @@ debugger;
               </tr>
             </thead>
             <tbody>
-              {items.map((item) => (
-                <tr key={item._id}>
+              {items.map((item,index) => (
+                 <tr key={item._id || index}>
                   <td>
                     <img src={item.imageUrl} alt={item.name} className="cart-img" />
                   </td>
                   <td>{item.name}</td>
-                  <td>{item.qty}</td>
-                  <td>₹{((item.discountPrice || 0) * item.qty).toFixed(2)}</td>
+                  <td>{item.quantity}</td>
+                  <td>₹{((item.discountPrice || 0) * item.quantity).toFixed(2)}</td>
                   <td>
                     <button onClick={() => removeFromCart(item._id)}>-</button>
-                    <button onClick={() => addToCart(item._id)}>+</button>
+                    <button onClick={() => addToCart(item)}>+</button>
                   </td>
                 </tr>
               ))}
