@@ -12,7 +12,6 @@ const ProductList = () => {
       .then((res) => res.json())
       .then((data) => {
         const extractedProducts = Object.values(data.products)[0];
-        console.log('Fetched Products:', extractedProducts);
         setProducts(extractedProducts);
       })
       .catch((err) => console.error('Failed to load products:', err));
@@ -33,19 +32,36 @@ const ProductList = () => {
     'GROUND CHAKKAR',
     'TWINKLING STAR',
     'BOMBS',
-    'GIFT BOXES'
+    'GIFT BOXES',
+    'PAPER BOMBS',
+    'SOUND WAR',
+    'ROCKETS',
+    'LOOSE CRACKERS',
+    'PEACOCK VARIETIE FOUNTAINS',
+    'COLOUR FOUNTAIN (1 PC)',
+    'COLOUR FOUTAIN (2 PCS)',
+    'MOTHER"S BRAND FOUTAIN',
+    'NOVELTIES CRACKERS',
+    'KIDS VARIETIE',
+    'SPARKLERS',
+    'MINI FANCY',
+    'AERIAL FANCY SHOT',
+    'MULTIPLE AERIAL SHOTS (SOUND & COLOURFUL)',
+    'COLOUR MATCHES'
+
   ];
+
+  let serialNumber = 1;
 
   return (
     <div className="product-table-container">
-      <h2 className="title">Order Online</h2>
       <table className="product-table">
         <thead>
           <tr>
+            <th>S.No</th>
             <th>Image</th>
             <th>Product</th>
             <th>Pack</th>
-            <th>Category</th>
             <th>Price</th>
             <th>Cart</th>
             <th>Qty</th>
@@ -58,10 +74,7 @@ const ProductList = () => {
 
             return (
               <React.Fragment key={category}>
-                <tr>
-                  <td colSpan="7" className="category-row">{category}</td>
-                </tr>
-
+                <tr><td colSpan="7" className="category-row">{category}</td></tr>
                 {items.map((p) => {
                   const cartItem = cartItems.find(i => i._id === p.id);
                   const productName = p["Product Name"] || "Unnamed Product";
@@ -70,6 +83,7 @@ const ProductList = () => {
 
                   return (
                     <tr key={p.id}>
+                      <td>{serialNumber++}</td>
                       <td>
                         <img
                           src={productImage}
@@ -79,8 +93,13 @@ const ProductList = () => {
                       </td>
                       <td>{productName}</td>
                       <td>{p.Unit || '1 Pkt'}</td>
-                      <td>{p.Category}</td>
-                      <td>₹{productPrice.toFixed(2)}</td>
+                     <td>
+                            {p["Original Price"] && p["Discount Price"] && (
+                            <span className="original-price">₹{parseFloat(p["Original Price"]).toFixed(2)}</span>
+                            )}
+                             <span className="discounted-price">₹{parseFloat(p["Discount Price"] || p["Original Price"] || 0).toFixed(2)}</span>
+                     </td>
+
                       <td>
                         {cartItem ? (
                           <CartControls item={cartItem} />
@@ -94,7 +113,7 @@ const ProductList = () => {
                                 imageUrl: productImage,
                                 discountPrice: productPrice,
                                 quantity: 1
-                              },true)
+                              }, true)
                             }
                           >
                             Add

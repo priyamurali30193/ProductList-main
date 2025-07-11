@@ -21,7 +21,6 @@ const CartPopup = () => {
      <table className="cart-popup-table">
   <thead>
     <tr>
-      <th>Image</th>
       <th>Product</th>
       <th>Qty</th>
       <th>Price</th>
@@ -30,9 +29,6 @@ const CartPopup = () => {
   <tbody>
     {cartItems.map((item) => (
       <tr key={item._id}>
-        <td>
-          <img src={item.imageUrl} alt={item.name} className="cart-popup-img" />
-        </td>
         <td>{item.name}</td>
         <td>
           <button onClick={() => removeFromCart(item._id)}>-</button>

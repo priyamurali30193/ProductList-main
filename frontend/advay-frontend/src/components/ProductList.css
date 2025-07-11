@@ -13,6 +13,7 @@
   justify-content: center;  /* centers horizontally */
   align-items: flex-start;  /* align to top */
 
+
 }
 
 .title {
@@ -30,6 +31,8 @@
   width: 100%;
   max-width: 1650px;
   overflow-x: auto;
+  //border-collapse: collapse; 
+   //margin: 50px auto;     
 }
 
 .product-table th,
@@ -37,11 +40,13 @@
   padding: 12px;
   border: 1px solid #a5d6a7;
   vertical-align: middle;
+ 
 }
 
 .product-table th {
   background-color: #f1f8e9;
   color: #2c2c85;
+  border-collapse: collapse;
 }
 
 .category-row {
@@ -50,7 +55,7 @@
   color: white;
   text-align: center;
   font-size: 1rem;
-  border: 1px solid #81c784;
+ 
 }
 
 .product-img {
@@ -72,8 +77,8 @@
   font-size: 0.9rem;
 }
 
-.discount-price {
-  background-color: green;
+.discounted-price {
+  background-color:rgb(12, 188, 18);
   color: #fff;
   padding: 4px 8px;
   border-radius: 999px;
